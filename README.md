@@ -4,11 +4,22 @@ CSS Dust Cleaner
 Tool that removes unused CSS selectors by searching through definied directories
 
 
+Install 
+--------------
+```sh
+pip install --upgrade git+https://github.com/mkriss/css-dust-cleaner
+
+```
+
+
+
+
 Example
 --------------
 ```sh
+from dustcleaner import Processor
 
-p = Processor(('bootstrap_example','example'))
+p = Processor(('bootstrap_example','/home/ubuntu/www/example'))
 p.start()
 
 Cleaned css paths
@@ -24,12 +35,6 @@ Dust clean finished. Now your files are 6% of original css files size
 ```
 
 
-
-Prerequisites
---------------
-```sh
-pip install -r requirements.txt
-```
 
 
 
