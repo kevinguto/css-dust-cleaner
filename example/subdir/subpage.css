@@ -1,0 +1,10 @@
+#content p, #content blockquote {
+
+    font-family: Arial;
+}
+
+@media (min-width: 666px) {
+/*sub css meida query*/
+    p, li, blockquote { 	   font-size: 6.5em; }
+
+}

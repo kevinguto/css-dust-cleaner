@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Example page</title>
+    <link rel="stylesheet" href="page.css">
+    <style type="text/css">
+    .foo, .othercrap { color: blue; }
+    .bar { color: green; }
+    /*Komentars is stilaa*/
+    @media (min-width: 700px) {
+        p, li, blockquote { font-size: 2.5em; }
+    }
+
+    .catfoo, .moreothercrap { color: blue; }
+    
+    </style>
+
+  </head>
+  <body>
+    <div id="content">
+      <p class="foo">Expect this to be blue</p>
+      <p class="subcatbar">Sub Cat content</p>
+    </div>
+
+    <script>
+    onload = function() {
+      var parent = document.getElementById('content');
+      var bar = document.createElement('p');
+      bar.className = 'bar';
+      var text = document.createTextNode('Expect this to be green');
+      bar.appendChild(text);
+      parent.appendChild(bar);
+    };
+    </script>
+  </body>
+</html>

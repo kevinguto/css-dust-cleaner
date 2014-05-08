@@ -1,0 +1,16 @@
+
+body , .someNonUsedDiv {
+	background-color: #5CC7AD;
+}
+
+#header .foo,  #someNonUsedDiv {
+	color: blue;
+	display: table;
+	margin: 10px auto;
+}
+
+.myform ,  form.someNonUsedForm {
+	display: table;
+	margin: 10px auto;
+	width: 745px;
+}
