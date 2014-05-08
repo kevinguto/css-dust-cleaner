@@ -130,7 +130,7 @@ class Processor(object):
 
 		print('- ' * 40)
 		smaller = ((100*total_size_after) / total_size_before)
-		print('Dust clean finished. Now your files are '+ str(smaller) +"% of original css files size \n")
+		print('Dust cleaning finished. Now your files are '+ str(smaller) +"% of original css files size \n")
 
 
 	def make_timestamp(self):

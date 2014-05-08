@@ -29,7 +29,7 @@ Cleaned css paths
 /home/kriss/code/tests/css-cleaner/bootstrap_example/css/dist/style.css
 /home/kriss/code/tests/css-cleaner/bootstrap_example/css/dist/bootstrap.css
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-Dust clean finished. Now your files are 6% of original css files size 
+Dust cleaning finished. Now your files are 6% of original css files size 
 
 
 ```
