@@ -38,8 +38,9 @@ def _get_random_string():
     return ''.join(pl)
 
 def main():
-	p = Processor(('bootstrap_example','example'))
-	p.start()
+	print('\nExample\n')
+	print("p = Processor(('bootstrap_example','/home/ubuntu/www/example')) # Clean directories")
+	print("p.start()\n\n")
 
 
 class Processor(object):
