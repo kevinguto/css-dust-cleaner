@@ -1,7 +1,21 @@
+#!/usr/bin/env python
 # coding: utf8
 
+
+import io
+import os
 import re
-import os.path
+
+
+# Prevent spurious errors during `python setup.py test`, a la
+# http://www.eby-sarna.com/pipermail/peak/2010-May/003357.html:
+try:
+    pass
+except ImportError:
+    pass
+
+from setuptools import setup, find_packages
+
 
 
 ROOT = os.path.dirname(__file__)
@@ -32,5 +46,4 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.2',
     ],
-    **extra_kwargs
 )
