@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import sys
+
 from dustcleaner import Processor
 
 def example():
