@@ -16,6 +16,15 @@ except ImportError:
 
 from setuptools import setup, find_packages
 
+def read(*parts):
+    with io.open(os.path.join(os.path.dirname(__file__), *parts)) as f:
+        return f.read()
+
+def find_install_requires():
+    return [x.strip() for x in
+            read('requirements.txt').splitlines()
+            if x.strip() and not x.startswith('#')]
+
 
 
 ROOT = os.path.dirname(__file__)
@@ -34,6 +43,7 @@ setup(
     long_description=README,
     url='http://github.com/mkriss/css-dust-cleaner',
     license='MIT',
+    install_requires=find_install_requires(),
     packages=['dustcleaner'],
     classifiers=[
         'Development Status :: 4 - Beta',
