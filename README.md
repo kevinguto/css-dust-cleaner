@@ -24,6 +24,7 @@ p = Processor((('bootstrap_example',None),
 			     verbose=False)
 p.start()
 
+```
 
 Example output
 --------------
