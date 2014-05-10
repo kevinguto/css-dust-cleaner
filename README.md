@@ -16,7 +16,7 @@ pip install --upgrade git+https://github.com/mkriss/css-dust-cleaner
 
 Example
 --------------
-```sh
+```python
 from dustcleaner import Processor
 
 p = Processor((('bootstrap_example',None),
