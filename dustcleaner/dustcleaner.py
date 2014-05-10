@@ -57,6 +57,7 @@ class Processor(object):
 		self.patterns = patterns
 		self.clean_dir_name = clean_dir_name
 		self.ignore_dir = ignore_dir + (clean_dir_name,)
+		print 'ignore_dir', self.ignore_dir
 		self.blocks = {}
 		self.pages = []
 		self.css = []
