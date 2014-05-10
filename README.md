@@ -21,9 +21,13 @@ from dustcleaner import Processor
 
 p = Processor((('bootstrap_example',None),
 			   ('example','/home/kriss/wwwpage/static/example')),
-			     verbose=True)
+			     verbose=False)
 p.start()
 
+
+Example output
+--------------
+```sh
 Cleaned css paths
 
 /home/kriss/wwwpage/static/example/page.css
