@@ -19,21 +19,27 @@ Example
 ```sh
 from dustcleaner import Processor
 
-p = Processor(('bootstrap_example','/home/ubuntu/www/example'))
+p = Processor((('bootstrap_example',None),('example','/home/kriss/code/projects/css-dust-cleaner/static/example')))
 p.start()
 
 Cleaned css paths
 
-/home/kriss/code/tests/css-cleaner/example/subdir/dist/subpage.css
-/home/kriss/code/tests/css-cleaner/example/dist/page.css
-/home/kriss/code/tests/css-cleaner/bootstrap_example/css/dist/style.css
-/home/kriss/code/tests/css-cleaner/bootstrap_example/css/dist/bootstrap.css
+/home/kriss/code/projects/css-dust-cleaner/static/example/page.css
+/home/kriss/code/projects/css-dust-cleaner/static/example/subdir/subpage.css
+/home/kriss/code/projects/css-dust-cleaner/dustcleaner/bootstrap_example/css/dist/style.css
+/home/kriss/code/projects/css-dust-cleaner/dustcleaner/bootstrap_example/css/dist/bootstrap.css
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Dust cleaning finished. Now your files are 6% of original css files size 
 
 
 ```
 
+
+ToDo
+--------------
+
+Add Javascript selectore search for jquery and js.
+Fix media querie bug.( Commenting inside media querie, before selector all the styles are lost. )
 
 
 

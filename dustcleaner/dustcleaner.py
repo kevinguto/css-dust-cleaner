@@ -27,9 +27,9 @@ RE_NESTS = re.compile('@(-|keyframes).*?({)', re.DOTALL | re.M)
 RE_CLASS_DEF = re.compile('\.([\w-]+)')
 RE_ID_DEF = re.compile('#([\w-]+)')
 
-EXCEPTIONAL_SELECTORS = (
-    'html',
-)
+# EXCEPTIONAL_SELECTORS = (
+#     'html',
+# )
 
 def _get_random_string():
     p = 'abcdefghijklmopqrstuvwxyz'
@@ -39,21 +39,24 @@ def _get_random_string():
 
 def main():
 	print('\nExample\n')
-	print("p = Processor(('bootstrap_example','/home/ubuntu/www/example')) # Clean directories")
+	print("p = Processor((('bootstrap_example',None),('example','/home/kriss/code/projects/css-dust-cleaner/static/example'))) # Clean directories")
 	print("p.start()\n\n")
 
 
 class Processor(object):
-	def __init__(self, base_dirs, patterns = ('*.html','*.js','*.css'), clean_dir_name='dist' , verbose=False, debug=False, optimize_lookup=True):
+	def __init__(self, base_dirs, exceptional_selectors = (), ignore_dir=(), patterns = ('*.html','*.js','*.css'), clean_dir_name='dist' , verbose=False, debug=False, optimize_lookup=True):
 		self.debug = debug
 		self.file_paths = []
 		self.base_dirs = []
 		for d in base_dirs:
-			self.base_dirs.append(os.path.abspath(d))
-
+			if d[1]:
+				self.base_dirs.append((os.path.abspath(d[0]),os.path.abspath(d[1]),))
+			else:
+				self.base_dirs.append((os.path.abspath(d[0]),None,))
+		self.output = {}
 		self.patterns = patterns
 		self.clean_dir_name = clean_dir_name
-		self.ignore_dir = [clean_dir_name,]
+		self.ignore_dir = ignore_dir + (clean_dir_name,)
 		self.blocks = {}
 		self.pages = []
 		self.css = []
@@ -62,7 +65,7 @@ class Processor(object):
 		self._all_ids = set()
 		self._all_classes = set()
 		self.verbose = verbose
-		self.ITERA = 0
+		self.exceptional_selectors = exceptional_selectors + ('html',)
 
 	def start(self):
 		self._get_paths()
@@ -113,16 +116,26 @@ class Processor(object):
 				print("AFTER:")
 				print(each.after)
 
+			
 
-			dist_dir = ntpath.dirname(each.path) + '/' + self.clean_dir_name + '/'
-			if not os.path.exists(dist_dir):
-				os.makedirs(dist_dir)
+			new_file_path = self.output[each.path]
+			if new_file_path:
+				dist_dir = ntpath.dirname(new_file_path) #+ '/' + self.clean_dir_name + '/'
+				if not os.path.exists(dist_dir):
+					os.makedirs(dist_dir)
+			else:
+				dist_dir = ntpath.dirname(each.path) + '/' + self.clean_dir_name + '/'
+				if not os.path.exists(dist_dir):
+					os.makedirs(dist_dir)
 
-			new_path = dist_dir + ntpath.basename(each.path)
-			file = open(new_path, "w")
+				new_file_path =  dist_dir + ntpath.basename(each.path)
+
+
+			
+			file = open(new_file_path, "w")
 			file.write(each.after)
 			file.close()
-			new_css_paths.append(new_path)
+			new_css_paths.append(new_file_path)
 
 		print('Cleaned css paths\n')
 		for p in new_css_paths:
@@ -139,7 +152,7 @@ class Processor(object):
 		return timestamp
 
 	def find_files(self, directory):
-		for root, dirs, files in os.walk(directory):
+		for root, dirs, files in os.walk(directory[0]):
 			if ntpath.split(root)[1].strip() in self.ignore_dir:
 				#'ignore this dir'
 				continue
@@ -147,7 +160,12 @@ class Processor(object):
 				for pattern in self.patterns:
 					if fnmatch.fnmatch(basename, pattern):
 						filename = os.path.join(root, basename)
-						yield File(filename,pattern)
+						if directory[1]:
+							output_dir = directory[1] + root.replace(directory[0],'')
+							filename_out = os.path.join(output_dir, basename)
+						else:
+							filename_out = None
+						yield File(filename,pattern, filename_out)
 
 	def _get_paths(self):
 		for base_dir in self.base_dirs:
@@ -171,14 +189,15 @@ class Processor(object):
 			file = open(f.path, 'r')
 			content = file.read()
 			if f.pattern == '*.css':
-				key = ('css',f.path)
+				print ' f.path] , f.path_out ', f.path , f.path_out
+				self.output[f.path] = f.path_out
+				key = ('css',f.path, f.path_out )
 				self.blocks[key] = content
 
 		for identifier in sorted(self.blocks.keys(), key=lambda x: str(x[0])):
 			content = self.blocks[identifier]
-			# print 'identifier', identifier[1]
 			processed = self._process_content(content, self._bodies )
-			self.ITERA = self.ITERA + 1
+
 
 			if isinstance(identifier[0], int):
 				line, path = identifier
@@ -191,14 +210,10 @@ class Processor(object):
 				    )
 				)
 			else:
-				filetype, path = identifier
-				self.css.append(
-				    CssResult(
-				        path,
-				        content,
-				        processed
-				    )
-				)
+				filetype, path, path_out = identifier
+				result = CssResult(path, content, processed)
+				self.css.append(result)
+
 		
 
 	def process_html(self, html, path):
@@ -391,7 +406,7 @@ class Processor(object):
 		    
 		    for selector in selectors_split:
 		        s = selector.strip()
-		        if s in EXCEPTIONAL_SELECTORS:
+		        if s in self.exceptional_selectors:
 		            continue
 
 		        if s in _already_found:
@@ -557,10 +572,11 @@ def get_charset(response, default='utf-8'):
 
 class File(object):
 	"""docstring for File"""
-	def __init__(self, path, pattern):
+	def __init__(self, path, pattern, path_out):
 		super(File, self).__init__()
 		self.path = path
 		self.pattern = pattern
+		self.path_out = path_out 
 		
 
 
