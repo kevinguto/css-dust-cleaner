@@ -19,13 +19,13 @@ Example
 ```sh
 from dustcleaner import Processor
 
-p = Processor((('bootstrap_example',None),('example','/home/kriss/code/projects/css-dust-cleaner/static/example')))
+p = Processor((('bootstrap_example',None),('example','/home/kriss/wwwpage/static/example')))
 p.start()
 
 Cleaned css paths
 
-/home/kriss/code/projects/css-dust-cleaner/static/example/page.css
-/home/kriss/code/projects/css-dust-cleaner/static/example/subdir/subpage.css
+/home/kriss/wwwpage/static/example/page.css
+/home/kriss/wwwpage/static/example/subdir/subpage.css
 /home/kriss/code/projects/css-dust-cleaner/dustcleaner/bootstrap_example/css/dist/style.css
 /home/kriss/code/projects/css-dust-cleaner/dustcleaner/bootstrap_example/css/dist/bootstrap.css
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -40,6 +40,10 @@ ToDo
 
 Add Javascript selectore search for jquery and js.
 Fix media querie bug.( Commenting inside media querie, before selector all the styles are lost. )
+
+
+
+
 
 
 

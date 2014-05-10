@@ -39,7 +39,7 @@ def _get_random_string():
 
 def main():
 	print('\nExample\n')
-	print("p = Processor((('bootstrap_example',None),('example','/home/kriss/code/projects/css-dust-cleaner/static/example'))) # Clean directories")
+	print("p = Processor((('bootstrap_example',None),('example','/home/kriss/wwwpage/static/example'))) # Clean directories")
 	print("p.start()\n\n")
 
 
