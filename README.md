@@ -19,15 +19,17 @@ Example
 ```sh
 from dustcleaner import Processor
 
-p = Processor((('bootstrap_example',None),('example','/home/kriss/wwwpage/static/example')))
+p = Processor((('bootstrap_example',None),
+			   ('example','/home/kriss/wwwpage/static/example')),
+			     verbose=True)
 p.start()
 
 Cleaned css paths
 
 /home/kriss/wwwpage/static/example/page.css
 /home/kriss/wwwpage/static/example/subdir/subpage.css
-/home/kriss/code/projects/css-dust-cleaner/dustcleaner/bootstrap_example/css/dist/style.css
-/home/kriss/code/projects/css-dust-cleaner/dustcleaner/bootstrap_example/css/dist/bootstrap.css
+/home/kriss/wwwpage/bootstrap_example/css/dist/style.css
+/home/kriss/wwwpage/bootstrap_example/css/dist/bootstrap.css
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Dust cleaning finished. Now your files are 6% of original css files size 
 
