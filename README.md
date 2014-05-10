@@ -38,12 +38,12 @@ Dust cleaning finished. Now your files are 6% of original css files size
 ToDo
 --------------
 
--Add Javascript selectore search for jquery and js.
--Fix media querie bug. ( Commenting inside media querie, before selector all the styles are lost. )
+* Add Javascript selectore search for jquery and js.
+* Fix media querie bug. ( Commenting inside media querie, before selector all the styles are lost. )
 
-—
-—
-—
+<br />
+<br />
+<br />
 
 Inspired and partly forked from By Peter Bengtsson, 2012-2014 
 https://github.com/peterbe/mincss
